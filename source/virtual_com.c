@@ -29,18 +29,12 @@
 
 #include "usb_device_descriptor.h"
 #include "virtual_com.h"
-#if (defined(FSL_FEATURE_SOC_SYSMPU_COUNT) && (FSL_FEATURE_SOC_SYSMPU_COUNT > 0U))
-#include "fsl_sysmpu.h"
-#endif /* FSL_FEATURE_SOC_SYSMPU_COUNT */
+
 
 #if ((defined FSL_FEATURE_SOC_USBPHY_COUNT) && (FSL_FEATURE_SOC_USBPHY_COUNT > 0U))
 #include "usb_phy.h"
 #endif
-#if defined(FSL_FEATURE_USB_KHCI_KEEP_ALIVE_ENABLED) && (FSL_FEATURE_USB_KHCI_KEEP_ALIVE_ENABLED > 0U) && \
-    defined(USB_DEVICE_CONFIG_KEEP_ALIVE_MODE) && (USB_DEVICE_CONFIG_KEEP_ALIVE_MODE > 0U) &&             \
-    defined(FSL_FEATURE_USB_KHCI_USB_RAM) && (FSL_FEATURE_USB_KHCI_USB_RAM > 0U)
-extern uint8_t USB_EnterLowpowerMode(void);
-#endif
+
 #include "fsl_power.h"
 /*******************************************************************************
  * Definitions
@@ -52,9 +46,7 @@ extern uint8_t USB_EnterLowpowerMode(void);
 void BOARD_InitHardware(void);
 void USB_DeviceClockInit(void);
 void USB_DeviceIsrEnable(void);
-#if USB_DEVICE_CONFIG_USE_TASK
-void USB_DeviceTaskFn(void *deviceHandle);
-#endif
+
 
 void BOARD_DbgConsole_Deinit(void);
 void BOARD_DbgConsole_Init(void);
@@ -113,12 +105,7 @@ static usb_device_class_config_list_struct_t s_cdcAcmConfigList = {
     1,
 };
 
-#if defined(FSL_FEATURE_USB_KHCI_KEEP_ALIVE_ENABLED) && (FSL_FEATURE_USB_KHCI_KEEP_ALIVE_ENABLED > 0U) && \
-    defined(USB_DEVICE_CONFIG_KEEP_ALIVE_MODE) && (USB_DEVICE_CONFIG_KEEP_ALIVE_MODE > 0U) &&             \
-    defined(FSL_FEATURE_USB_KHCI_USB_RAM) && (FSL_FEATURE_USB_KHCI_USB_RAM > 0U)
-volatile static uint8_t s_waitForDataReceive = 0;
-volatile static uint8_t s_comOpen            = 0;
-#endif
+
 /*******************************************************************************
  * Code
  ******************************************************************************/
@@ -128,21 +115,10 @@ void USB0_IRQHandler(void)
     USB_DeviceLpcIp3511IsrFunction(s_cdcVcom.deviceHandle);
 }
 #endif
-#if (defined(USB_DEVICE_CONFIG_LPCIP3511HS) && (USB_DEVICE_CONFIG_LPCIP3511HS > 0U))
-void USB1_IRQHandler(void)
-{
-    USB_DeviceLpcIp3511IsrFunction(s_cdcVcom.deviceHandle);
-}
-#endif
+
 void USB_DeviceClockInit(void)
 {
-#if defined(USB_DEVICE_CONFIG_LPCIP3511HS) && (USB_DEVICE_CONFIG_LPCIP3511HS > 0U)
-    usb_phy_config_struct_t phyConfig = {
-        BOARD_USB_PHY_D_CAL,
-        BOARD_USB_PHY_TXCAL45DP,
-        BOARD_USB_PHY_TXCAL45DM,
-    };
-#endif
+
 
 #if defined(USB_DEVICE_CONFIG_LPCIP3511FS) && (USB_DEVICE_CONFIG_LPCIP3511FS > 0U)
     /* enable USB IP clock */
@@ -155,18 +131,7 @@ void USB_DeviceClockInit(void)
 #endif
 
 #endif
-#if defined(USB_DEVICE_CONFIG_LPCIP3511HS) && (USB_DEVICE_CONFIG_LPCIP3511HS > 0U)
-    /* enable USB IP clock */
-    CLOCK_EnableUsbhs0PhyPllClock(kCLOCK_UsbPhySrcExt, BOARD_XTAL0_CLK_HZ);
-    CLOCK_EnableUsbhs0DeviceClock(kCLOCK_UsbSrcUnused, 0U);
-    USB_EhciPhyInit(CONTROLLER_ID, BOARD_XTAL0_CLK_HZ, &phyConfig);
-#if defined(FSL_FEATURE_USBHSD_USB_RAM) && (FSL_FEATURE_USBHSD_USB_RAM)
-    for (int i = 0; i < FSL_FEATURE_USBHSD_USB_RAM; i++)
-    {
-        ((uint8_t *)FSL_FEATURE_USBHSD_USB_RAM_BASE_ADDRESS)[i] = 0x00U;
-    }
-#endif
-#endif
+
 }
 void USB_DeviceIsrEnable(void)
 {
@@ -175,25 +140,12 @@ void USB_DeviceIsrEnable(void)
     uint8_t usbDeviceIP3511Irq[] = USB_IRQS;
     irqNumber                    = usbDeviceIP3511Irq[CONTROLLER_ID - kUSB_ControllerLpcIp3511Fs0];
 #endif
-#if defined(USB_DEVICE_CONFIG_LPCIP3511HS) && (USB_DEVICE_CONFIG_LPCIP3511HS > 0U)
-    uint8_t usbDeviceIP3511Irq[] = USBHSD_IRQS;
-    irqNumber                    = usbDeviceIP3511Irq[CONTROLLER_ID - kUSB_ControllerLpcIp3511Hs0];
-#endif
+
     /* Install isr, set priority, and enable IRQ. */
     NVIC_SetPriority((IRQn_Type)irqNumber, USB_DEVICE_INTERRUPT_PRIORITY);
     EnableIRQ((IRQn_Type)irqNumber);
 }
-#if USB_DEVICE_CONFIG_USE_TASK
-void USB_DeviceTaskFn(void *deviceHandle)
-{
-#if defined(USB_DEVICE_CONFIG_LPCIP3511FS) && (USB_DEVICE_CONFIG_LPCIP3511FS > 0U)
-    USB_DeviceLpcIp3511TaskFunction(deviceHandle);
-#endif
-#if defined(USB_DEVICE_CONFIG_LPCIP3511HS) && (USB_DEVICE_CONFIG_LPCIP3511HS > 0U)
-    USB_DeviceLpcIp3511TaskFunction(deviceHandle);
-#endif
-}
-#endif
+
 /*!
  * @brief CDC class specific callback function.
  *
@@ -207,10 +159,9 @@ void USB_DeviceTaskFn(void *deviceHandle)
  */
 usb_status_t USB_DeviceCdcVcomCallback(class_handle_t handle, uint32_t event, void *param)
 {
-#if ((defined USB_DEVICE_CONFIG_CDC_CIC_EP_DISABLE) && (USB_DEVICE_CONFIG_CDC_CIC_EP_DISABLE > 0U))
-#else
+
     uint32_t len;
-#endif
+
     uint8_t *uartBitmap;
     usb_device_cdc_acm_request_param_struct_t *acmReqParam;
     usb_device_endpoint_callback_message_struct_t *epCbParam;
@@ -238,12 +189,7 @@ usb_status_t USB_DeviceCdcVcomCallback(class_handle_t handle, uint32_t event, vo
                     /* Schedule buffer for next receive event */
                     error = USB_DeviceCdcAcmRecv(handle, USB_CDC_VCOM_BULK_OUT_ENDPOINT, s_currRecvBuf,
                                                  g_UsbDeviceCdcVcomDicEndpoints[1].maxPacketSize);
-#if defined(FSL_FEATURE_USB_KHCI_KEEP_ALIVE_ENABLED) && (FSL_FEATURE_USB_KHCI_KEEP_ALIVE_ENABLED > 0U) && \
-    defined(USB_DEVICE_CONFIG_KEEP_ALIVE_MODE) && (USB_DEVICE_CONFIG_KEEP_ALIVE_MODE > 0U) &&             \
-    defined(FSL_FEATURE_USB_KHCI_USB_RAM) && (FSL_FEATURE_USB_KHCI_USB_RAM > 0U)
-                    s_waitForDataReceive = 1;
-                    USB0->INTEN &= ~USB_INTEN_SOFTOKEN_MASK;
-#endif
+
                 }
             }
             else
@@ -258,23 +204,11 @@ usb_status_t USB_DeviceCdcVcomCallback(class_handle_t handle, uint32_t event, vo
                 s_recvSize = epCbParam->length;
                 error      = kStatus_USB_Success;
 
-#if defined(FSL_FEATURE_USB_KHCI_KEEP_ALIVE_ENABLED) && (FSL_FEATURE_USB_KHCI_KEEP_ALIVE_ENABLED > 0U) && \
-    defined(USB_DEVICE_CONFIG_KEEP_ALIVE_MODE) && (USB_DEVICE_CONFIG_KEEP_ALIVE_MODE > 0U) &&             \
-    defined(FSL_FEATURE_USB_KHCI_USB_RAM) && (FSL_FEATURE_USB_KHCI_USB_RAM > 0U)
-                s_waitForDataReceive = 0;
-                USB0->INTEN |= USB_INTEN_SOFTOKEN_MASK;
-#endif
                 if (!s_recvSize)
                 {
                     /* Schedule buffer for next receive event */
                     error = USB_DeviceCdcAcmRecv(handle, USB_CDC_VCOM_BULK_OUT_ENDPOINT, s_currRecvBuf,
                                                  g_UsbDeviceCdcVcomDicEndpoints[1].maxPacketSize);
-#if defined(FSL_FEATURE_USB_KHCI_KEEP_ALIVE_ENABLED) && (FSL_FEATURE_USB_KHCI_KEEP_ALIVE_ENABLED > 0U) && \
-    defined(USB_DEVICE_CONFIG_KEEP_ALIVE_MODE) && (USB_DEVICE_CONFIG_KEEP_ALIVE_MODE > 0U) &&             \
-    defined(FSL_FEATURE_USB_KHCI_USB_RAM) && (FSL_FEATURE_USB_KHCI_USB_RAM > 0U)
-                    s_waitForDataReceive = 1;
-                    USB0->INTEN &= ~USB_INTEN_SOFTOKEN_MASK;
-#endif
                 }
             }
         }
@@ -400,8 +334,7 @@ usb_status_t USB_DeviceCdcVcomCallback(class_handle_t handle, uint32_t event, vo
             uartBitmap    = (uint8_t *)&acmInfo->serialStateBuf[NOTIF_PACKET_SIZE + UART_BITMAP_SIZE - 2];
             uartBitmap[0] = acmInfo->uartState & 0xFFu;
             uartBitmap[1] = (acmInfo->uartState >> 8) & 0xFFu;
-#if ((defined USB_DEVICE_CONFIG_CDC_CIC_EP_DISABLE) && (USB_DEVICE_CONFIG_CDC_CIC_EP_DISABLE > 0U))
-#else
+
             len = (uint32_t)(NOTIF_PACKET_SIZE + UART_BITMAP_SIZE);
             if (0 == ((usb_device_cdc_acm_struct_t *)handle)->hasSentState)
             {
@@ -412,7 +345,7 @@ usb_status_t USB_DeviceCdcVcomCallback(class_handle_t handle, uint32_t event, vo
                 }
                 ((usb_device_cdc_acm_struct_t *)handle)->hasSentState = 1;
             }
-#endif
+
             /* Update status */
             if (acmInfo->dteStatus & USB_DEVICE_CDC_CONTROL_SIG_BITMAP_CARRIER_ACTIVATION)
             {
@@ -426,14 +359,6 @@ usb_status_t USB_DeviceCdcVcomCallback(class_handle_t handle, uint32_t event, vo
             if (1 == s_cdcVcom.attach)
             {
                 s_cdcVcom.startTransactions = 1;
-#if defined(FSL_FEATURE_USB_KHCI_KEEP_ALIVE_ENABLED) && (FSL_FEATURE_USB_KHCI_KEEP_ALIVE_ENABLED > 0U) && \
-    defined(USB_DEVICE_CONFIG_KEEP_ALIVE_MODE) && (USB_DEVICE_CONFIG_KEEP_ALIVE_MODE > 0U) &&             \
-    defined(FSL_FEATURE_USB_KHCI_USB_RAM) && (FSL_FEATURE_USB_KHCI_USB_RAM > 0U)
-                s_waitForDataReceive = 1;
-                USB0->INTEN &= ~USB_INTEN_SOFTOKEN_MASK;
-                s_comOpen = 1;
-                usb_echo("USB_APP_CDC_DTE_ACTIVATED\r\n");
-#endif
             }
             error = kStatus_USB_Success;
         }
@@ -471,14 +396,6 @@ usb_status_t USB_DeviceCallback(usb_device_handle handle, uint32_t event, void *
             s_cdcVcom.attach               = 0;
             s_cdcVcom.currentConfiguration = 0U;
             error                          = kStatus_USB_Success;
-#if (defined(USB_DEVICE_CONFIG_EHCI) && (USB_DEVICE_CONFIG_EHCI > 0U)) || \
-    (defined(USB_DEVICE_CONFIG_LPCIP3511HS) && (USB_DEVICE_CONFIG_LPCIP3511HS > 0U))
-            /* Get USB speed to configure the device, including max packet size and interval of the endpoints. */
-            if (kStatus_USB_Success == USB_DeviceClassGetSpeed(CONTROLLER_ID, &s_cdcVcom.speed))
-            {
-                USB_DeviceSetSpeed(handle, s_cdcVcom.speed);
-            }
-#endif
         }
         break;
         case kUSB_DeviceEventSetConfiguration:
@@ -587,9 +504,6 @@ usb_status_t USB_DeviceCallback(usb_device_handle handle, uint32_t event, void *
 static void APPInit(void)
 {
     USB_DeviceClockInit();
-#if (defined(FSL_FEATURE_SOC_SYSMPU_COUNT) && (FSL_FEATURE_SOC_SYSMPU_COUNT > 0U))
-    SYSMPU_Enable(SYSMPU, 0);
-#endif /* FSL_FEATURE_SOC_SYSMPU_COUNT */
 
     s_cdcVcom.speed        = USB_SPEED_FULL;
     s_cdcVcom.attach       = 0;
@@ -655,44 +569,11 @@ static void APPTask(void)
                 /* Failure to send Data Handling code here */
             }
         }
-#if defined(FSL_FEATURE_USB_KHCI_KEEP_ALIVE_ENABLED) && (FSL_FEATURE_USB_KHCI_KEEP_ALIVE_ENABLED > 0U) && \
-    defined(USB_DEVICE_CONFIG_KEEP_ALIVE_MODE) && (USB_DEVICE_CONFIG_KEEP_ALIVE_MODE > 0U) &&             \
-    defined(FSL_FEATURE_USB_KHCI_USB_RAM) && (FSL_FEATURE_USB_KHCI_USB_RAM > 0U)
-        if ((s_waitForDataReceive))
-        {
-            if (s_comOpen == 1)
-            {
-                /* Wait for all the packets been sent during opening the com port. Otherwise these packets may
-                 * wake up the system.
-                 */
-                usb_echo("Waiting to enter lowpower ...\r\n");
-                for (uint32_t i = 0U; i < 16000000U; ++i)
-                {
-                    __NOP(); /* delay */
-                }
-
-                s_comOpen = 0;
-            }
-            usb_echo("Enter lowpower\r\n");
-            BOARD_DbgConsole_Deinit();
-            USB0->INTEN &= ~USB_INTEN_TOKDNEEN_MASK;
-            USB_EnterLowpowerMode();
-
-            s_waitForDataReceive = 0;
-            USB0->INTEN |= USB_INTEN_TOKDNEEN_MASK;
-            BOARD_DbgConsole_Init();
-            usb_echo("Exit  lowpower\r\n");
-        }
-#endif
     }
 }
 
-#if defined(__CC_ARM) || (defined(__ARMCC_VERSION)) || defined(__GNUC__)
-int main(void)
-#else
-void main(void)
-#endif
-{
+
+int main(void) {
     /* set BOD VBAT level to 1.65V */
     POWER_SetBodVbatLevel(kPOWER_BodVbatLevel1650mv, kPOWER_BodHystLevel50mv, false);
     /* attach 12 MHz clock to FLEXCOMM0 (debug console) */
@@ -718,15 +599,7 @@ void main(void)
     RESET_PeripheralReset(kUSB1_RST_SHIFT_RSTn);
     RESET_PeripheralReset(kUSB1RAM_RST_SHIFT_RSTn);
 
-#if (defined USB_DEVICE_CONFIG_LPCIP3511HS) && (USB_DEVICE_CONFIG_LPCIP3511HS)
-    CLOCK_EnableClock(kCLOCK_Usbh1);
-    /* Put PHY powerdown under software control */
-    *((uint32_t *)(USBHSH_BASE + 0x50)) = USBHSH_PORTMODE_SW_PDCOM_MASK;
-    /* According to reference mannual, device mode setting has to be set by access usb host register */
-    *((uint32_t *)(USBHSH_BASE + 0x50)) |= USBHSH_PORTMODE_DEV_ENABLE_MASK;
-    /* enable usb1 host clock */
-    CLOCK_DisableClock(kCLOCK_Usbh1);
-#endif
+
 #if (defined USB_DEVICE_CONFIG_LPCIP3511FS) && (USB_DEVICE_CONFIG_LPCIP3511FS)
     POWER_DisablePD(kPDRUNCFG_PD_USB0_PHY); /*< Turn on USB Phy */
     CLOCK_SetClkDiv(kCLOCK_DivUsb0Clk, 1, false);
@@ -745,8 +618,6 @@ void main(void)
     {
         APPTask();
 
-#if USB_DEVICE_CONFIG_USE_TASK
-        USB_DeviceTaskFn(s_cdcVcom.deviceHandle);
-#endif
+
     }
 }

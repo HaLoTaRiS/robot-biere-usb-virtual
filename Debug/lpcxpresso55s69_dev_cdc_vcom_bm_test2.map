@@ -352,7 +352,7 @@ Discarded input sections
  .data          0x00000000        0x0 ./usb/device/source/usb_device_ch9.o
  .bss           0x00000000        0x0 ./usb/device/source/usb_device_ch9.o
  .debug_macro   0x00000000      0xad2 ./usb/device/source/usb_device_ch9.o
- .debug_macro   0x00000000       0xbf ./usb/device/source/usb_device_ch9.o
+ .debug_macro   0x00000000       0xbb ./usb/device/source/usb_device_ch9.o
  .debug_macro   0x00000000       0x10 ./usb/device/source/usb_device_ch9.o
  .debug_macro   0x00000000      0x12e ./usb/device/source/usb_device_ch9.o
  .debug_macro   0x00000000      0x5b3 ./usb/device/source/usb_device_ch9.o
@@ -428,7 +428,7 @@ Discarded input sections
  .text.USB_DeviceGetVersion
                 0x00000000       0x24 ./usb/device/source/usb_device_dci.o
  .debug_macro   0x00000000      0xad2 ./usb/device/source/usb_device_dci.o
- .debug_macro   0x00000000       0xbf ./usb/device/source/usb_device_dci.o
+ .debug_macro   0x00000000       0xbb ./usb/device/source/usb_device_dci.o
  .debug_macro   0x00000000       0x10 ./usb/device/source/usb_device_dci.o
  .debug_macro   0x00000000      0x12e ./usb/device/source/usb_device_dci.o
  .debug_macro   0x00000000      0x5b3 ./usb/device/source/usb_device_dci.o
@@ -502,7 +502,7 @@ Discarded input sections
  .debug_macro   0x00000000      0x12e ./usb/device/class/cdc/usb_device_cdc_acm.o
  .debug_macro   0x00000000       0xd8 ./usb/device/class/cdc/usb_device_cdc_acm.o
  .debug_macro   0x00000000       0x22 ./usb/device/class/cdc/usb_device_cdc_acm.o
- .debug_macro   0x00000000       0xbf ./usb/device/class/cdc/usb_device_cdc_acm.o
+ .debug_macro   0x00000000       0xbb ./usb/device/class/cdc/usb_device_cdc_acm.o
  .debug_macro   0x00000000      0x5b3 ./usb/device/class/cdc/usb_device_cdc_acm.o
  .debug_macro   0x00000000       0x16 ./usb/device/class/cdc/usb_device_cdc_acm.o
  .debug_macro   0x00000000       0x22 ./usb/device/class/cdc/usb_device_cdc_acm.o
@@ -573,7 +573,7 @@ Discarded input sections
  .text.USB_DeviceClassGetSpeed
                 0x00000000       0x44 ./usb/device/class/usb_device_class.o
  .debug_macro   0x00000000      0xad2 ./usb/device/class/usb_device_class.o
- .debug_macro   0x00000000       0xbf ./usb/device/class/usb_device_class.o
+ .debug_macro   0x00000000       0xbb ./usb/device/class/usb_device_class.o
  .debug_macro   0x00000000       0x10 ./usb/device/class/usb_device_class.o
  .debug_macro   0x00000000      0x12e ./usb/device/class/usb_device_class.o
  .debug_macro   0x00000000      0x5b3 ./usb/device/class/usb_device_class.o
@@ -673,7 +673,7 @@ Discarded input sections
  .text.USB_DeviceSetSpeed
                 0x00000000      0x240 ./source/usb_device_descriptor.o
  .debug_macro   0x00000000      0xad2 ./source/usb_device_descriptor.o
- .debug_macro   0x00000000       0xbf ./source/usb_device_descriptor.o
+ .debug_macro   0x00000000       0xbb ./source/usb_device_descriptor.o
  .debug_macro   0x00000000       0x10 ./source/usb_device_descriptor.o
  .debug_macro   0x00000000      0x12e ./source/usb_device_descriptor.o
  .debug_macro   0x00000000      0x5b3 ./source/usb_device_descriptor.o
@@ -778,7 +778,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x16 ./source/virtual_com.o
  .debug_macro   0x00000000       0x1c ./source/virtual_com.o
  .debug_macro   0x00000000       0x2e ./source/virtual_com.o
- .debug_macro   0x00000000       0xbf ./source/virtual_com.o
+ .debug_macro   0x00000000       0xbb ./source/virtual_com.o
  .debug_macro   0x00000000       0x2e ./source/virtual_com.o
  .debug_macro   0x00000000       0x16 ./source/virtual_com.o
  .debug_macro   0x00000000       0xe2 ./source/virtual_com.o
@@ -790,7 +790,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x34 ./source/virtual_com.o
  .debug_macro   0x00000000      0x160 ./source/virtual_com.o
  .debug_macro   0x00000000       0x3a ./source/virtual_com.o
- .debug_macro   0x00000000      0x2b4 ./source/virtual_com.o
+ .debug_macro   0x00000000      0x2ae ./source/virtual_com.o
  .group         0x00000000        0xc ./drivers/fsl_clock.o
  .group         0x00000000        0xc ./drivers/fsl_clock.o
  .group         0x00000000        0xc ./drivers/fsl_clock.o
@@ -3460,7 +3460,7 @@ END GROUP
 OUTPUT(lpcxpresso55s69_dev_cdc_vcom_bm_test2.axf elf32-littlearm)
 LOAD linker stubs
 
-.debug_info     0x00000000    0x1b53e
+.debug_info     0x00000000    0x1b53d
  .debug_info    0x00000000       0xaa ./utilities/fsl_assert.o
  .debug_info    0x000000aa      0xcf3 ./utilities/fsl_debug_console.o
  .debug_info    0x00000d9d     0x190c ./usb/device/source/lpcip3511/usb_device_lpcip3511.o
@@ -3470,22 +3470,22 @@ LOAD linker stubs
  .debug_info    0x0000601d      0xea5 ./usb/device/class/usb_device_class.o
  .debug_info    0x00006ec2      0x707 ./startup/startup_lpc55s69_cm33_core0.o
  .debug_info    0x000075c9       0x3c ./source/semihost_hardfault.o
- .debug_info    0x00007605      0xed5 ./source/usb_device_descriptor.o
- .debug_info    0x000084da     0x3176 ./source/virtual_com.o
- .debug_info    0x0000b650     0x332f ./drivers/fsl_clock.o
- .debug_info    0x0000e97f       0xf5 ./drivers/fsl_common_arm.o
- .debug_info    0x0000ea74     0x1adf ./drivers/fsl_flexcomm.o
- .debug_info    0x00010553     0x2a56 ./drivers/fsl_power.o
- .debug_info    0x00012fa9      0xee3 ./drivers/fsl_reset.o
- .debug_info    0x00013e8c     0x1773 ./drivers/fsl_usart.o
- .debug_info    0x000155ff     0x14af ./device/system_LPC55S69_cm33_core0.o
- .debug_info    0x00016aae      0xc47 ./component/uart/fsl_adapter_usart.o
- .debug_info    0x000176f5      0xfdf ./component/osa/fsl_os_abstraction_bm.o
- .debug_info    0x000186d4      0x7fe ./board/board.o
- .debug_info    0x00018ed2     0x16e2 ./board/clock_config.o
- .debug_info    0x0001a5b4      0xf8a ./board/pin_mux.o
+ .debug_info    0x00007605      0xed4 ./source/usb_device_descriptor.o
+ .debug_info    0x000084d9     0x3176 ./source/virtual_com.o
+ .debug_info    0x0000b64f     0x332f ./drivers/fsl_clock.o
+ .debug_info    0x0000e97e       0xf5 ./drivers/fsl_common_arm.o
+ .debug_info    0x0000ea73     0x1adf ./drivers/fsl_flexcomm.o
+ .debug_info    0x00010552     0x2a56 ./drivers/fsl_power.o
+ .debug_info    0x00012fa8      0xee3 ./drivers/fsl_reset.o
+ .debug_info    0x00013e8b     0x1773 ./drivers/fsl_usart.o
+ .debug_info    0x000155fe     0x14af ./device/system_LPC55S69_cm33_core0.o
+ .debug_info    0x00016aad      0xc47 ./component/uart/fsl_adapter_usart.o
+ .debug_info    0x000176f4      0xfdf ./component/osa/fsl_os_abstraction_bm.o
+ .debug_info    0x000186d3      0x7fe ./board/board.o
+ .debug_info    0x00018ed1     0x16e2 ./board/clock_config.o
+ .debug_info    0x0001a5b3      0xf8a ./board/pin_mux.o
 
-.debug_abbrev   0x00000000     0x2e93
+.debug_abbrev   0x00000000     0x2e7d
  .debug_abbrev  0x00000000       0x66 ./utilities/fsl_assert.o
  .debug_abbrev  0x00000066      0x260 ./utilities/fsl_debug_console.o
  .debug_abbrev  0x000002c6      0x316 ./usb/device/source/lpcip3511/usb_device_lpcip3511.o
@@ -3495,20 +3495,20 @@ LOAD linker stubs
  .debug_abbrev  0x00000ba9      0x1d8 ./usb/device/class/usb_device_class.o
  .debug_abbrev  0x00000d81      0x165 ./startup/startup_lpc55s69_cm33_core0.o
  .debug_abbrev  0x00000ee6       0x31 ./source/semihost_hardfault.o
- .debug_abbrev  0x00000f17      0x1b2 ./source/usb_device_descriptor.o
- .debug_abbrev  0x000010c9      0x394 ./source/virtual_com.o
- .debug_abbrev  0x0000145d      0x374 ./drivers/fsl_clock.o
- .debug_abbrev  0x000017d1       0x92 ./drivers/fsl_common_arm.o
- .debug_abbrev  0x00001863      0x2c0 ./drivers/fsl_flexcomm.o
- .debug_abbrev  0x00001b23      0x335 ./drivers/fsl_power.o
- .debug_abbrev  0x00001e58      0x15a ./drivers/fsl_reset.o
- .debug_abbrev  0x00001fb2      0x302 ./drivers/fsl_usart.o
- .debug_abbrev  0x000022b4      0x1fa ./device/system_LPC55S69_cm33_core0.o
- .debug_abbrev  0x000024ae      0x1e0 ./component/uart/fsl_adapter_usart.o
- .debug_abbrev  0x0000268e      0x371 ./component/osa/fsl_os_abstraction_bm.o
- .debug_abbrev  0x000029ff       0xd1 ./board/board.o
- .debug_abbrev  0x00002ad0      0x1ea ./board/clock_config.o
- .debug_abbrev  0x00002cba      0x1d9 ./board/pin_mux.o
+ .debug_abbrev  0x00000f17      0x19c ./source/usb_device_descriptor.o
+ .debug_abbrev  0x000010b3      0x394 ./source/virtual_com.o
+ .debug_abbrev  0x00001447      0x374 ./drivers/fsl_clock.o
+ .debug_abbrev  0x000017bb       0x92 ./drivers/fsl_common_arm.o
+ .debug_abbrev  0x0000184d      0x2c0 ./drivers/fsl_flexcomm.o
+ .debug_abbrev  0x00001b0d      0x335 ./drivers/fsl_power.o
+ .debug_abbrev  0x00001e42      0x15a ./drivers/fsl_reset.o
+ .debug_abbrev  0x00001f9c      0x302 ./drivers/fsl_usart.o
+ .debug_abbrev  0x0000229e      0x1fa ./device/system_LPC55S69_cm33_core0.o
+ .debug_abbrev  0x00002498      0x1e0 ./component/uart/fsl_adapter_usart.o
+ .debug_abbrev  0x00002678      0x371 ./component/osa/fsl_os_abstraction_bm.o
+ .debug_abbrev  0x000029e9       0xd1 ./board/board.o
+ .debug_abbrev  0x00002aba      0x1ea ./board/clock_config.o
+ .debug_abbrev  0x00002ca4      0x1d9 ./board/pin_mux.o
 
 .debug_aranges  0x00000000      0xe78
  .debug_aranges
@@ -3583,7 +3583,7 @@ LOAD linker stubs
  .debug_ranges  0x00000cd0       0x40 ./board/clock_config.o
  .debug_ranges  0x00000d10       0x28 ./board/pin_mux.o
 
-.debug_macro    0x00000000    0x17cd2
+.debug_macro    0x00000000    0x17cc8
  .debug_macro   0x00000000      0x14d ./utilities/fsl_assert.o
  .debug_macro   0x0000014d      0xad2 ./utilities/fsl_assert.o
  .debug_macro   0x00000c1f       0x10 ./utilities/fsl_assert.o
@@ -3618,48 +3618,48 @@ LOAD linker stubs
  .debug_macro   0x00014b53       0x16 ./utilities/fsl_debug_console.o
  .debug_macro   0x00014b69       0x46 ./utilities/fsl_debug_console.o
  .debug_macro   0x00014baf      0x30f ./usb/device/source/lpcip3511/usb_device_lpcip3511.o
- .debug_macro   0x00014ebe       0xbf ./usb/device/source/lpcip3511/usb_device_lpcip3511.o
- .debug_macro   0x00014f7d       0x34 ./usb/device/source/lpcip3511/usb_device_lpcip3511.o
- .debug_macro   0x00014fb1       0x16 ./usb/device/source/lpcip3511/usb_device_lpcip3511.o
- .debug_macro   0x00014fc7       0x4c ./usb/device/source/lpcip3511/usb_device_lpcip3511.o
- .debug_macro   0x00015013      0x1c8 ./usb/device/source/usb_device_ch9.o
- .debug_macro   0x000151db       0x3a ./usb/device/source/usb_device_ch9.o
- .debug_macro   0x00015215      0x1c4 ./usb/device/source/usb_device_dci.o
- .debug_macro   0x000153d9      0x1cb ./usb/device/class/cdc/usb_device_cdc_acm.o
- .debug_macro   0x000155a4      0x160 ./usb/device/class/cdc/usb_device_cdc_acm.o
- .debug_macro   0x00015704      0x1c8 ./usb/device/class/usb_device_class.o
- .debug_macro   0x000158cc       0x29 ./startup/startup_lpc55s69_cm33_core0.o
- .debug_macro   0x000158f5       0x11 ./source/semihost_hardfault.o
- .debug_macro   0x00015906      0x1c8 ./source/usb_device_descriptor.o
- .debug_macro   0x00015ace      0x2b4 ./source/usb_device_descriptor.o
- .debug_macro   0x00015d82      0x245 ./source/virtual_com.o
- .debug_macro   0x00015fc7       0x34 ./source/virtual_com.o
- .debug_macro   0x00015ffb       0x35 ./source/virtual_com.o
- .debug_macro   0x00016030       0x10 ./source/virtual_com.o
- .debug_macro   0x00016040       0xfe ./source/virtual_com.o
- .debug_macro   0x0001613e      0x1f0 ./source/virtual_com.o
- .debug_macro   0x0001632e       0x5e ./source/virtual_com.o
- .debug_macro   0x0001638c      0x304 ./source/virtual_com.o
- .debug_macro   0x00016690      0x1db ./drivers/fsl_clock.o
- .debug_macro   0x0001686b      0x13c ./drivers/fsl_common_arm.o
- .debug_macro   0x000169a7      0x145 ./drivers/fsl_flexcomm.o
- .debug_macro   0x00016aec       0x10 ./drivers/fsl_flexcomm.o
- .debug_macro   0x00016afc      0x410 ./drivers/fsl_power.o
- .debug_macro   0x00016f0c      0x13c ./drivers/fsl_reset.o
- .debug_macro   0x00017048      0x154 ./drivers/fsl_usart.o
- .debug_macro   0x0001719c       0x1c ./drivers/fsl_usart.o
- .debug_macro   0x000171b8       0xc1 ./device/system_LPC55S69_cm33_core0.o
- .debug_macro   0x00017279      0x151 ./component/uart/fsl_adapter_usart.o
- .debug_macro   0x000173ca       0x22 ./component/uart/fsl_adapter_usart.o
- .debug_macro   0x000173ec      0x184 ./component/osa/fsl_os_abstraction_bm.o
- .debug_macro   0x00017570       0x10 ./component/osa/fsl_os_abstraction_bm.o
- .debug_macro   0x00017580      0x181 ./board/board.o
- .debug_macro   0x00017701      0x15c ./board/clock_config.o
- .debug_macro   0x0001785d      0x2fe ./board/clock_config.o
- .debug_macro   0x00017b5b       0x2f ./board/clock_config.o
- .debug_macro   0x00017b8a      0x148 ./board/pin_mux.o
+ .debug_macro   0x00014ebe       0xbb ./usb/device/source/lpcip3511/usb_device_lpcip3511.o
+ .debug_macro   0x00014f79       0x34 ./usb/device/source/lpcip3511/usb_device_lpcip3511.o
+ .debug_macro   0x00014fad       0x16 ./usb/device/source/lpcip3511/usb_device_lpcip3511.o
+ .debug_macro   0x00014fc3       0x4c ./usb/device/source/lpcip3511/usb_device_lpcip3511.o
+ .debug_macro   0x0001500f      0x1c8 ./usb/device/source/usb_device_ch9.o
+ .debug_macro   0x000151d7       0x3a ./usb/device/source/usb_device_ch9.o
+ .debug_macro   0x00015211      0x1c4 ./usb/device/source/usb_device_dci.o
+ .debug_macro   0x000153d5      0x1cb ./usb/device/class/cdc/usb_device_cdc_acm.o
+ .debug_macro   0x000155a0      0x160 ./usb/device/class/cdc/usb_device_cdc_acm.o
+ .debug_macro   0x00015700      0x1c8 ./usb/device/class/usb_device_class.o
+ .debug_macro   0x000158c8       0x29 ./startup/startup_lpc55s69_cm33_core0.o
+ .debug_macro   0x000158f1       0x11 ./source/semihost_hardfault.o
+ .debug_macro   0x00015902      0x1c8 ./source/usb_device_descriptor.o
+ .debug_macro   0x00015aca      0x2ae ./source/usb_device_descriptor.o
+ .debug_macro   0x00015d78      0x245 ./source/virtual_com.o
+ .debug_macro   0x00015fbd       0x34 ./source/virtual_com.o
+ .debug_macro   0x00015ff1       0x35 ./source/virtual_com.o
+ .debug_macro   0x00016026       0x10 ./source/virtual_com.o
+ .debug_macro   0x00016036       0xfe ./source/virtual_com.o
+ .debug_macro   0x00016134      0x1f0 ./source/virtual_com.o
+ .debug_macro   0x00016324       0x5e ./source/virtual_com.o
+ .debug_macro   0x00016382      0x304 ./source/virtual_com.o
+ .debug_macro   0x00016686      0x1db ./drivers/fsl_clock.o
+ .debug_macro   0x00016861      0x13c ./drivers/fsl_common_arm.o
+ .debug_macro   0x0001699d      0x145 ./drivers/fsl_flexcomm.o
+ .debug_macro   0x00016ae2       0x10 ./drivers/fsl_flexcomm.o
+ .debug_macro   0x00016af2      0x410 ./drivers/fsl_power.o
+ .debug_macro   0x00016f02      0x13c ./drivers/fsl_reset.o
+ .debug_macro   0x0001703e      0x154 ./drivers/fsl_usart.o
+ .debug_macro   0x00017192       0x1c ./drivers/fsl_usart.o
+ .debug_macro   0x000171ae       0xc1 ./device/system_LPC55S69_cm33_core0.o
+ .debug_macro   0x0001726f      0x151 ./component/uart/fsl_adapter_usart.o
+ .debug_macro   0x000173c0       0x22 ./component/uart/fsl_adapter_usart.o
+ .debug_macro   0x000173e2      0x184 ./component/osa/fsl_os_abstraction_bm.o
+ .debug_macro   0x00017566       0x10 ./component/osa/fsl_os_abstraction_bm.o
+ .debug_macro   0x00017576      0x181 ./board/board.o
+ .debug_macro   0x000176f7      0x15c ./board/clock_config.o
+ .debug_macro   0x00017853      0x2fe ./board/clock_config.o
+ .debug_macro   0x00017b51       0x2f ./board/clock_config.o
+ .debug_macro   0x00017b80      0x148 ./board/pin_mux.o
 
-.debug_line     0x00000000     0xebd9
+.debug_line     0x00000000     0xebc8
  .debug_line    0x00000000      0x41f ./utilities/fsl_assert.o
  .debug_line    0x0000041f      0xce0 ./utilities/fsl_debug_console.o
  .debug_line    0x000010ff     0x14c0 ./usb/device/source/lpcip3511/usb_device_lpcip3511.o
@@ -3669,20 +3669,20 @@ LOAD linker stubs
  .debug_line    0x000054b9      0xc1c ./usb/device/class/usb_device_class.o
  .debug_line    0x000060d5      0x6b1 ./startup/startup_lpc55s69_cm33_core0.o
  .debug_line    0x00006786       0x59 ./source/semihost_hardfault.o
- .debug_line    0x000067df      0x968 ./source/usb_device_descriptor.o
- .debug_line    0x00007147      0xfa4 ./source/virtual_com.o
- .debug_line    0x000080eb     0x17a9 ./drivers/fsl_clock.o
- .debug_line    0x00009894      0x3c9 ./drivers/fsl_common_arm.o
- .debug_line    0x00009c5d      0x66b ./drivers/fsl_flexcomm.o
- .debug_line    0x0000a2c8      0xedc ./drivers/fsl_power.o
- .debug_line    0x0000b1a4      0x422 ./drivers/fsl_reset.o
- .debug_line    0x0000b5c6      0xf27 ./drivers/fsl_usart.o
- .debug_line    0x0000c4ed      0x6cf ./device/system_LPC55S69_cm33_core0.o
- .debug_line    0x0000cbbc      0x5ee ./component/uart/fsl_adapter_usart.o
- .debug_line    0x0000d1aa      0xbb5 ./component/osa/fsl_os_abstraction_bm.o
- .debug_line    0x0000dd5f      0x4d9 ./board/board.o
- .debug_line    0x0000e238      0x51d ./board/clock_config.o
- .debug_line    0x0000e755      0x484 ./board/pin_mux.o
+ .debug_line    0x000067df      0x963 ./source/usb_device_descriptor.o
+ .debug_line    0x00007142      0xf98 ./source/virtual_com.o
+ .debug_line    0x000080da     0x17a9 ./drivers/fsl_clock.o
+ .debug_line    0x00009883      0x3c9 ./drivers/fsl_common_arm.o
+ .debug_line    0x00009c4c      0x66b ./drivers/fsl_flexcomm.o
+ .debug_line    0x0000a2b7      0xedc ./drivers/fsl_power.o
+ .debug_line    0x0000b193      0x422 ./drivers/fsl_reset.o
+ .debug_line    0x0000b5b5      0xf27 ./drivers/fsl_usart.o
+ .debug_line    0x0000c4dc      0x6cf ./device/system_LPC55S69_cm33_core0.o
+ .debug_line    0x0000cbab      0x5ee ./component/uart/fsl_adapter_usart.o
+ .debug_line    0x0000d199      0xbb5 ./component/osa/fsl_os_abstraction_bm.o
+ .debug_line    0x0000dd4e      0x4d9 ./board/board.o
+ .debug_line    0x0000e227      0x51d ./board/clock_config.o
+ .debug_line    0x0000e744      0x484 ./board/pin_mux.o
 
 .debug_str      0x00000000    0xc7dc0
  .debug_str     0x00000000    0xb18b2 ./utilities/fsl_assert.o

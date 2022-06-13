@@ -112,35 +112,6 @@
 #define USB_DEVICE_CONFIG_COMPLIANCE_TEST (0U)
 #endif
 
-#if ((defined(USB_DEVICE_CONFIG_COMPLIANCE_TEST)) && (USB_DEVICE_CONFIG_COMPLIANCE_TEST > 0U))
-
-/*! @brief Undefine the macro USB_DEVICE_CONFIG_USB20_TEST_MODE. */
-#undef USB_DEVICE_CONFIG_USB20_TEST_MODE
-/*! @brief Undefine the macro USB_DEVICE_CONFIG_CV_TEST. */
-#undef USB_DEVICE_CONFIG_CV_TEST
-
-/*! @brief enable the test mode. */
-#define USB_DEVICE_CONFIG_USB20_TEST_MODE (1U)
-
-/*! @brief enable the CV test */
-#define USB_DEVICE_CONFIG_CV_TEST (1U)
-
-#endif
-
-#if ((defined(USB_DEVICE_CONFIG_KHCI)) && (USB_DEVICE_CONFIG_KHCI > 0U))
-
-/*! @brief The MAX buffer length for the KHCI DMA workaround.*/
-#define USB_DEVICE_CONFIG_KHCI_DMA_ALIGN_BUFFER_LENGTH (64U)
-#endif
-
-#if ((defined(USB_DEVICE_CONFIG_EHCI)) && (USB_DEVICE_CONFIG_EHCI > 0U))
-/*! @brief How many the DTD are supported. */
-#define USB_DEVICE_CONFIG_EHCI_MAX_DTD (16U)
-
-/*! @brief Whether the EHCI ID pin detect feature enabled. */
-#define USB_DEVICE_CONFIG_EHCI_ID_PIN_DETECT (0U)
-#endif
-
 /*! @brief Whether the keep alive feature enabled. */
 #define USB_DEVICE_CONFIG_KEEP_ALIVE_MODE (0U)
 
@@ -151,16 +122,8 @@
 /*! @brief Whether the low power mode is enabled or not. */
 #define USB_DEVICE_CONFIG_LOW_POWER_MODE (0U)
 
-#if ((defined(USB_DEVICE_CONFIG_LOW_POWER_MODE)) && (USB_DEVICE_CONFIG_LOW_POWER_MODE > 0U))
-/*! @brief Whether device remote wakeup supported. 1U supported, 0U not supported */
-#define USB_DEVICE_CONFIG_REMOTE_WAKEUP (0U)
-
-/*! @brief Whether LPM is supported. 1U supported, 0U not supported */
-#define USB_DEVICE_CONFIG_LPM_L1 (0U)
-#else
 /*! @brief The device remote wakeup is unsupported. */
 #define USB_DEVICE_CONFIG_REMOTE_WAKEUP (0U)
-#endif
 
 /*! @brief Whether the device detached feature is enabled or not. */
 #define USB_DEVICE_CONFIG_DETACH_ENABLE (0U)
